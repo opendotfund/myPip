@@ -60,7 +60,7 @@ export const EarlyBirdApiInput: React.FC<EarlyBirdApiInputProps> = ({ onApplyApi
           <button
             onClick={() => setShowInput(true)}
             className="px-3 py-1.5 bg-neutral-500 hover:bg-neutral-600 text-white text-xs font-semibold rounded-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-1 flex-shrink-0"
-          >
+      >
             Enter Code
           </button>
         )}
@@ -69,7 +69,7 @@ export const EarlyBirdApiInput: React.FC<EarlyBirdApiInputProps> = ({ onApplyApi
       {showInput && (
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="relative">
-            <input
+      <input
               type="text" 
               id="early-bird-code"
               value={earlyBirdCode}
@@ -83,7 +83,7 @@ export const EarlyBirdApiInput: React.FC<EarlyBirdApiInputProps> = ({ onApplyApi
                   ? 'bg-emerald-50 border-emerald-300 text-emerald-800' 
                   : 'bg-white border-neutral-300 text-neutral-800 placeholder-neutral-500/70'
               }`}
-              disabled={isLoading}
+        disabled={isLoading}
               aria-label="Early Bird Code Input"
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -100,11 +100,11 @@ export const EarlyBirdApiInput: React.FC<EarlyBirdApiInputProps> = ({ onApplyApi
           </div>
           
           <div className="flex items-center space-x-2">
-            <button
-              type="submit"
+      <button
+        type="submit"
               disabled={isLoading || !earlyBirdCode.trim()}
               className="flex-1 flex items-center justify-center px-4 py-2 bg-neutral-500 hover:bg-neutral-600 disabled:bg-neutral-300 text-white text-sm font-semibold rounded-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-1"
-            >
+      >
               {isLoading ? (
                 <>
                   <LoadingSpinner className="h-4 w-4 mr-2 text-white" />
@@ -129,9 +129,9 @@ export const EarlyBirdApiInput: React.FC<EarlyBirdApiInputProps> = ({ onApplyApi
               className="px-3 py-2 text-neutral-600 hover:text-neutral-800 text-sm font-medium transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-neutral-400 rounded-lg"
             >
               Cancel
-            </button>
+      </button>
           </div>
-        </form>
+    </form>
       )}
 
       {!showInput && (

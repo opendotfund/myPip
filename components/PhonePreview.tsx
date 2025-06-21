@@ -14,33 +14,33 @@ export const PhonePreview: React.FC<PhonePreviewProps> = ({ htmlContent, onPrevi
 
     // Add a small delay to ensure the HTML content is fully rendered
     const timeoutId = setTimeout(() => {
-      const interactiveElements = container.querySelectorAll('[data-action-id]');
+    const interactiveElements = container.querySelectorAll('[data-action-id]');
       console.log(`Found ${interactiveElements.length} interactive elements in preview`);
       
-      const listenersToRemove: Array<{ el: Element, listener: (e: Event) => void }> = [];
+    const listenersToRemove: Array<{ el: Element, listener: (e: Event) => void }> = [];
 
       interactiveElements.forEach((el, index) => {
-        const actionId = el.getAttribute('data-action-id');
-        const actionDescription = el.getAttribute('data-action-description');
+      const actionId = el.getAttribute('data-action-id');
+      const actionDescription = el.getAttribute('data-action-description');
         
         console.log(`Setting up listener for element ${index}:`, { actionId, actionDescription });
 
-        if (actionId) {
-          const eventListener = (e: Event) => {
-            e.preventDefault();
-            e.stopPropagation();
+      if (actionId) {
+        const eventListener = (e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
             console.log(`Interaction detected:`, { actionId, actionDescription });
             
             // Ensure attribute still exists
-            const currentActionId = el.getAttribute('data-action-id');
-            const currentActionDescription = el.getAttribute('data-action-description');
-            if (currentActionId) {
-              onPreviewInteraction(currentActionId, currentActionDescription || currentActionId);
-            }
-          };
-          
+          const currentActionId = el.getAttribute('data-action-id');
+          const currentActionDescription = el.getAttribute('data-action-description');
+          if (currentActionId) {
+            onPreviewInteraction(currentActionId, currentActionDescription || currentActionId);
+          }
+        };
+        
           // Add both click and touchstart events for better mobile support
-          el.addEventListener('click', eventListener);
+        el.addEventListener('click', eventListener);
           el.addEventListener('touchstart', eventListener, { passive: false });
           
           // Make the element look clickable
@@ -49,15 +49,15 @@ export const PhonePreview: React.FC<PhonePreviewProps> = ({ htmlContent, onPrevi
             el.style.userSelect = 'none';
           }
           
-          listenersToRemove.push({ el, listener: eventListener });
-        }
-      });
+        listenersToRemove.push({ el, listener: eventListener });
+      }
+    });
 
-      return () => {
-        listenersToRemove.forEach(({ el, listener }) => {
-          el.removeEventListener('click', listener);
+    return () => {
+      listenersToRemove.forEach(({ el, listener }) => {
+        el.removeEventListener('click', listener);
           el.removeEventListener('touchstart', listener);
-        });
+      });
       };
     }, 100); // Small delay to ensure content is rendered
 

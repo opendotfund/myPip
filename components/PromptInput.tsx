@@ -152,7 +152,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
                     <span className="text-xl">{modelConfig.icon}</span>
                     <div className="text-left flex-1">
                       <div className={`font-semibold text-sm ${isSelected ? 'text-blue-700' : 'text-gray-800'}`}>
-                        {model.name}
+                {model.name}
                       </div>
                       <div className={`text-xs ${isSelected ? 'text-blue-600' : 'text-gray-500'}`}>
                         {modelConfig.description}
@@ -171,7 +171,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
                   </button>
                 );
               })}
-            </div>
+          </div>
           )}
         </div>
         <button
