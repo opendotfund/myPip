@@ -11,24 +11,12 @@ import { SparklesIcon } from './icons/SparklesIcon';
 interface SubscriptionModalProps {
   isOpen: boolean;
   onClose: () => void;
-  seedName: string;
-  setSeedName: (name: string) => void;
-  seedEmail: string;
-  setSeedEmail: (email: string) => void;
-  onSeedInterestSubmit: () => void;
-  seedFormMessage: string | null;
   contactEmail: string;
 }
 
 export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
   isOpen,
   onClose,
-  seedName,
-  setSeedName,
-  seedEmail,
-  setSeedEmail,
-  onSeedInterestSubmit,
-  seedFormMessage,
   contactEmail
 }) => {
   if (!isOpen) return null;
@@ -50,8 +38,8 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
-          <h2 id="subscription-modal-title" className="text-2xl font-semibold text-amber-600 flex items-center">
-            <SparklesIcon className="h-6 w-6 mr-2 text-amber-500" />
+          <h2 id="subscription-modal-title" className="text-2xl font-semibold text-blue-600 flex items-center">
+            <SparklesIcon className="h-6 w-6 mr-2 text-blue-500" />
             Help us Grow!
           </h2>
           <button
@@ -64,12 +52,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
         </div>
 
         <div className="space-y-6">
-          <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
-            <h3 className="text-xl font-semibold text-amber-700 mb-2">Limited Time: Early Bird Elite Plan!</h3>
+          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h3 className="text-xl font-semibold text-blue-700 mb-2">Limited Time: Early Bird Elite Plan!</h3>
             <p className="text-neutral-700 mb-1">
               Become a foundational supporter of myPip and get unlimited access, priority features, and direct input on our roadmap.
             </p>
-            <p className="text-3xl font-bold text-amber-600 my-3">$1000 <span className="text-lg font-normal text-neutral-600">/ Year</span></p>
+            <p className="text-3xl font-bold text-blue-600 my-3">$1000 <span className="text-lg font-normal text-neutral-600">/ Year</span></p>
             
             <div className="mt-2 w-full flex justify-center">
               <stripe-buy-button
@@ -79,9 +67,6 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
               </stripe-buy-button>
             </div>
             
-            <p className="text-sm text-neutral-600 mt-3 mb-1">
-              <strong>Accepted Payments (via Stripe):</strong> Major Debit/Credit Cards, Apple Pay, Google Pay, and more.
-            </p>
              <p className="text-xs text-neutral-500 italic text-center">
               Click the button above to go to Stripe's secure checkout page.
             </p>
@@ -90,50 +75,27 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <div className="border-t border-neutral-200 pt-6">
             <h3 className="text-xl font-semibold text-neutral-700 mb-3">Interested in our Seed Round?</h3>
             <p className="text-neutral-600 mb-4">
-              We're building the future of app development. If you're interested in learning about seed investment opportunities, let us know!
+              We're building the future of app development. Join our seed round through Dealum, the next-generation investor collaboration platform.
             </p>
-            <form onSubmit={(e) => { e.preventDefault(); onSeedInterestSubmit(); }} className="space-y-4">
-              <div>
-                <label htmlFor="seedName" className="block text-sm font-medium text-neutral-700 mb-1">Full Name</label>
-                <input
-                  type="text"
-                  id="seedName"
-                  value={seedName}
-                  onChange={(e) => setSeedName(e.target.value)}
-                  className="w-full p-2.5 bg-white border border-neutral-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-neutral-800 placeholder-neutral-400"
-                  placeholder="Your Name"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="seedEmail" className="block text-sm font-medium text-neutral-700 mb-1">Email Address</label>
-                <input
-                  type="email"
-                  id="seedEmail"
-                  value={seedEmail}
-                  onChange={(e) => setSeedEmail(e.target.value)}
-                  className="w-full p-2.5 bg-white border border-neutral-300 rounded-md focus:ring-2 focus:ring-amber-500 focus:border-amber-500 text-neutral-800 placeholder-neutral-400"
-                  placeholder="you@example.com"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400"
-              >
-                Express Interest
-              </button>
-              {seedFormMessage && (
-                <p className={`mt-3 text-sm ${seedFormMessage.startsWith("Thank you") ? 'text-emerald-600' : 'text-red-600'}`}>
-                  {seedFormMessage}
-                </p>
-              )}
-            </form>
+            <a
+              href="https://app.dealum.com/#/company/fundingroundprofile/26521/o1727cw9xv2yu27n1f0pdq2yoyqq1jnc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center px-5 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              View Seed Round on Dealum
+            </a>
+            <p className="text-sm text-neutral-500 mt-3 text-center">
+              Opens in a new tab • Powered by Dealum
+            </p>
           </div>
           
           <div className="text-center text-sm text-neutral-500 mt-6 pt-4 border-t border-neutral-200">
             <p>For any questions regarding launch scope, timelines, careers, or investment opportunities, please contact us anytime at:</p>
-            <a href={`mailto:${contactEmail}`} className="font-medium text-amber-600 hover:text-amber-700">
+            <a href={`mailto:${contactEmail}`} className="font-medium text-blue-600 hover:text-blue-700">
               {contactEmail}
             </a>
           </div>
