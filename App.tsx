@@ -28,6 +28,7 @@ const App: React.FC = () => {
   
   const [isSubscriptionModalOpen, setIsSubscriptionModalOpen] = useState<boolean>(false);
   const [previewRefreshKey, setPreviewRefreshKey] = useState<number>(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false); // Added for mobile sidebar
 
   const [userProvidedApiKey, setUserProvidedApiKey] = useState<string | null>(null); // Added
   const [isEarlyBirdKeyApplied, setIsEarlyBirdKeyApplied] = useState<boolean>(false); // Added
@@ -230,8 +231,8 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-neutral-800 font-sans">
-      {/* Hidden Sidebar */}
-      <div className="fixed left-0 top-0 h-full w-16 hover:w-64 transition-all duration-300 ease-in-out bg-blue-900 text-white z-30 group">
+      {/* Hidden Sidebar - Hidden on mobile, hover on desktop */}
+      <div className={`fixed left-0 top-0 h-full transition-all duration-300 ease-in-out bg-blue-900 text-white z-30 group hidden md:block ${isSidebarOpen ? 'w-64' : 'w-16 hover:w-64'}`}>
         <div className="flex flex-col h-full">
           {/* Logo/Header */}
           <div className="p-4 border-b border-blue-800">
@@ -321,15 +322,125 @@ const App: React.FC = () => {
         </div>
       </div>
 
+      {/* Mobile Sidebar Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile Sidebar */}
+      <div className={`fixed left-0 top-0 h-full w-64 bg-blue-900 text-white z-50 transform transition-transform duration-300 ease-in-out md:hidden ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex flex-col h-full">
+          {/* Logo/Header */}
+          <div className="p-4 border-b border-blue-800">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <img 
+                  src="https://i.postimg.cc/QCGLyzyj/temp-Imagec-Se0jt.avif" 
+                  alt="myPip Logo" 
+                  className="h-8 w-8 rounded"
+                />
+                <span className="ml-3 text-sm font-semibold">
+                  myPip
+                </span>
+              </div>
+              <button 
+                onClick={() => setIsSidebarOpen(false)}
+                className="p-1 text-white hover:text-gray-300"
+              >
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          {/* Navigation Links */}
+          <nav className="flex-1 p-4 space-y-2">
+            <a 
+              href="https://supabase.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center p-2 rounded hover:bg-blue-800 transition-colors"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M20.29 12.29a1 1 0 0 0-1.42 0L15 16.17V4a1 1 0 0 0-2 0v12.17l-3.88-3.88a1 1 0 0 0-1.41 1.41l5.59 5.59a1 1 0 0 0 1.41 0l5.59-5.59a1 1 0 0 0 0-1.41z"/>
+              </svg>
+              <span className="ml-3 text-sm">
+                Supabase
+              </span>
+            </a>
+            
+            <a 
+              href="https://stripe.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center p-2 rounded hover:bg-blue-800 transition-colors"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span className="ml-3 text-sm">
+                Stripe
+              </span>
+            </a>
+            
+            <a 
+              href="https://n8n.io" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center p-2 rounded hover:bg-blue-800 transition-colors"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+              </svg>
+              <span className="ml-3 text-sm">
+                n8n
+              </span>
+            </a>
+            
+            {/* Configuration Section - Coming Soon */}
+            <div className="pt-4 border-t border-blue-800">
+              <div className="flex items-center p-2 rounded opacity-50 cursor-not-allowed">
+                <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97c0-.33-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.22-.08-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98c0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65z"/>
+                </svg>
+                <span className="ml-3 text-sm">
+                  Configuration
+                </span>
+                <span className="ml-auto text-xs bg-blue-700 px-2 py-1 rounded">
+                  Soon
+                </span>
+              </div>
+            </div>
+          </nav>
+          
+          {/* Footer */}
+          <div className="p-4 border-t border-blue-800">
+            <div className="flex items-center">
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+              <span className="ml-3 text-xs">
+                Developer Tools
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Main Content with left margin for sidebar */}
-      <div className="ml-16">
+      <div className="ml-0 md:ml-16">
         <header className="p-4 border-b border-neutral-200 sticky top-0 bg-white/80 backdrop-blur-md z-20">
           <div className="container mx-auto flex items-center justify-between">
             <div className="flex items-center">
               <img 
                 src="https://i.postimg.cc/QCGLyzyj/temp-Imagec-Se0jt.avif" 
                 alt="myPip Logo" 
-                className="h-14 w-36 rounded"
+                className="h-14 w-36 rounded cursor-pointer md:cursor-default"
+                onClick={() => setIsSidebarOpen(true)}
               />
             </div>
             <div className="flex items-center space-x-3 sm:space-x-4">
@@ -374,7 +485,63 @@ const App: React.FC = () => {
           </div>
 
           <div className="flex flex-col space-y-6">
-            <div className="flex justify-between items-start gap-3 mb-2">
+            {/* Mobile-only stacked buttons section */}
+            <div className="md:hidden space-y-3">
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => window.open('https://developer.apple.com/app-store/', '_blank')}
+                  disabled
+                  className="flex items-center px-3 py-1.5 bg-blue-200 text-blue-600 rounded-md text-xs font-semibold cursor-not-allowed opacity-70 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 focus:ring-offset-white"
+                  title="Deploy to App Store (Coming Soon)"
+                >
+                  <svg className="h-4 w-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
+                  Deploy to App Store
+                </button>
+                <button
+                  onClick={() => window.open('https://play.google.com/console/', '_blank')}
+                  disabled
+                  className="flex items-center px-3 py-1.5 bg-green-200 text-green-600 rounded-md text-xs font-semibold cursor-not-allowed opacity-70 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-1 focus:ring-offset-white"
+                  title="Deploy to Google Play Store (Coming Soon)"
+                >
+                  <svg className="h-4 w-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                  </svg>
+                  Deploy to Google Play
+                </button>
+              </div>
+              
+              <EarlyBirdApiInput 
+                onApplyApiKey={handleApplyApiKey} 
+                isLoading={isLoading} 
+                onOpenSubscriptionModal={() => setIsSubscriptionModalOpen(true)}
+              />
+              
+              <div className="flex flex-col gap-2">
+                <button
+                  title="Connect GitHub (Coming Soon)"
+                  disabled
+                  className="flex items-center px-3 py-1.5 bg-neutral-200 text-neutral-500 rounded-md text-sm font-medium cursor-not-allowed opacity-70"
+                >
+                  <GithubIcon className="h-4 w-4 mr-2" />
+                  Connect GitHub
+                </button>
+                <button
+                  title="Open in Xcode (Coming Soon)"
+                  disabled
+                  className="flex items-center px-3 py-1.5 bg-neutral-200 text-neutral-500 rounded-md text-sm font-medium cursor-not-allowed opacity-70"
+                >
+                  <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z"/>
+                  </svg>
+                  Open in Xcode
+                </button>
+              </div>
+            </div>
+
+            {/* Desktop-only horizontal layout */}
+            <div className="hidden md:flex justify-between items-start gap-3 mb-2">
               {/* Left side - Deploy buttons stacked */}
               <div className="flex flex-col gap-2">
                 <button
