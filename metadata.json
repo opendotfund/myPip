@@ -1,0 +1,5 @@
+{
+  "name": "myPip - AI App Builder",
+  "description": "A minimalistic AI-powered tool to generate iOS app code and previews from user prompts.",
+  "requestFramePermissions": []
+}

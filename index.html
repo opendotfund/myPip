@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>myPip - AI App Builder</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+  
+  <style>
+    /* Custom scrollbars for the new theme */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fdfbf6; /* Light cream track */
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e0cda9; /* Muted desert sand thumb */
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d3b894; /* Darker desert sand thumb on hover */
+    }
+    body, #root {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Ensure Tailwind applies JIT classes correctly, especially for responsive variants */
+    @layer utilities {
+      /* You can add custom utilities here if needed */
+    }
+    .fade-enter {
+      opacity: 0;
+    }
+    .fade-enter-active {
+      opacity: 1;
+      transition: opacity 300ms ease-in-out;
+    }
+    .fade-exit {
+      opacity: 1;
+    }
+    .fade-exit-active {
+      opacity: 0;
+      transition: opacity 300ms ease-in-out;
+    }
+
+    /* Basic Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50; /* Ensure modal is on top */
+    }
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 90%;
+      width: 500px; /* Or your preferred width */
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^19.1.0",
+    "@google/genai": "https://esm.sh/@google/genai@^1.6.0",
+    "react-dom": "https://esm.sh/react-dom@^19.1.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-white text-neutral-800">
+  <div id="root" class="flex-grow"></div>
+  <div id="modal-root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
