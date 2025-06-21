@@ -37,7 +37,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="flex-grow p-3 bg-amber-50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors text-neutral-800 placeholder-neutral-400 resize-none disabled:opacity-70 disabled:cursor-not-allowed"
+        className="flex-grow p-3 bg-blue-50 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-neutral-800 placeholder-neutral-400 resize-none disabled:opacity-70 disabled:cursor-not-allowed"
         rows={2}
         disabled={isLoading || isDisabled}
         aria-label="Refinement prompt"
@@ -45,7 +45,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       <button
         onClick={onSubmit}
         disabled={isLoading || isDisabled || !prompt.trim()}
-        className="flex-shrink-0 flex items-center justify-center px-5 py-3 bg-amber-500 hover:bg-amber-600 disabled:bg-neutral-400 disabled:text-neutral-100 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-75 h-[58px]" // Match typical textarea height with padding
+        className="flex-shrink-0 flex items-center justify-center px-5 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-neutral-400 disabled:text-neutral-100 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 h-[58px]" // Match typical textarea height with padding
         title={actionText}
       >
         {isLoading ? (

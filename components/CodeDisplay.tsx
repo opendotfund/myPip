@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { CopyIcon } from './icons/CopyIcon';
 import { CheckIcon } from './icons/CheckIcon';
@@ -28,11 +27,11 @@ export const CodeDisplay: React.FC<CodeDisplayProps> = ({ code }) => {
   }, [copied]);
 
   return (
-    <div className="bg-amber-50 rounded-lg shadow relative group border border-neutral-200">
+    <div className="bg-blue-50 rounded-lg shadow relative group border border-blue-200">
       <button
         onClick={handleCopy}
         title={copied ? 'Copied!' : 'Copy code'}
-        className="absolute top-2 right-2 p-1.5 bg-neutral-200 hover:bg-neutral-300 rounded text-neutral-600 hover:text-neutral-800 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-amber-500 disabled:opacity-50"
+        className="absolute top-2 right-2 p-1.5 bg-neutral-200 hover:bg-neutral-300 rounded text-neutral-600 hover:text-neutral-800 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
         disabled={!code || code.startsWith('//') || code.startsWith('Error:') || copied}
         aria-label={copied ? 'Code copied to clipboard' : 'Copy code to clipboard'}
       >

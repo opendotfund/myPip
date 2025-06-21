@@ -41,7 +41,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="e.g., A simple todo list app with a button to add tasks..."
-        className="w-full p-3 bg-amber-50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors text-neutral-800 placeholder-neutral-400 min-h-[120px] resize-none disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full p-3 bg-blue-50 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-neutral-800 placeholder-neutral-400 min-h-[120px] resize-none disabled:opacity-70 disabled:cursor-not-allowed"
         rows={5}
         disabled={isLoading || isDisabled}
         aria-label="App description prompt"
@@ -52,7 +52,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
             value={selectedModel}
             onChange={(e) => onModelChange(e.target.value)}
             disabled={isLoading || isDisabled}
-            className="w-full appearance-none bg-amber-50 border border-amber-200 text-neutral-800 py-2.5 px-3 pr-8 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full appearance-none bg-blue-50 border border-blue-200 text-neutral-800 py-2.5 px-3 pr-8 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             aria-label="Select AI Model"
           >
             {AI_MODELS.map((model: ModelOption) => (
@@ -68,7 +68,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
         <button
           onClick={onSubmit}
           disabled={isLoading || isDisabled || !prompt.trim()}
-          className="w-full sm:w-auto flex items-center justify-center px-6 py-2.5 bg-amber-500 hover:bg-amber-600 disabled:bg-neutral-400 disabled:text-neutral-100 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-75"
+          className="w-full sm:w-auto flex items-center justify-center px-6 py-2.5 bg-blue-500 hover:bg-blue-600 disabled:bg-neutral-400 disabled:text-neutral-100 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
         >
           {isLoading ? (
             <>

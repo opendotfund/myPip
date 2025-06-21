@@ -266,7 +266,7 @@ const App: React.FC = () => {
           <div className="flex items-center space-x-3 sm:space-x-4">
             <button
               onClick={() => setIsSubscriptionModalOpen(true)}
-              className="flex items-center px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-md text-xs sm:text-sm font-medium transition-colors"
+              className="flex items-center px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-xs sm:text-sm font-medium transition-colors"
               title="Get Unlimited Prompts & Support Us!"
             >
               <SparklesIcon className="h-4 w-4 mr-1 sm:mr-2" />
@@ -277,7 +277,7 @@ const App: React.FC = () => {
                 Unlimited Access
               </div>
             ) : (
-              <div className="text-xs sm:text-sm font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 sm:px-3 py-1 rounded-full">
+              <div className="text-xs sm:text-sm font-medium text-blue-700 bg-blue-100 px-2 sm:px-3 py-1 rounded-full">
                 Prompts: {freePromptsRemaining}/{MAX_FREE_PROMPTS}
               </div>
             )}
@@ -362,7 +362,7 @@ const App: React.FC = () => {
                   />
                 </div>
                  {chatHistory.length > 0 && (
-                  <div className="bg-blue-50 p-3 rounded-lg border border-neutral-200 text-xs">
+                  <div className="bg-blue-50 p-3 rounded-lg border border-blue-200 text-xs">
                     <p className="font-semibold text-neutral-600 mb-2">Refinement Log:</p>
                     <div ref={chatHistoryRef} className="max-h-48 overflow-y-auto space-y-2 pr-1">
                       {chatHistory.map((item, index) => (
