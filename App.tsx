@@ -306,11 +306,10 @@ const App: React.FC = () => {
 
         <div className="flex flex-col space-y-6">
           <div className="flex flex-col sm:flex-row justify-end items-end gap-3 mb-2"> {/* Changed items-center to items-end */}
-             <EarlyBirdApiInput onApplyApiKey={handleApplyApiKey} isLoading={isLoading} />
              <button
                 onClick={() => window.open('https://developer.apple.com/app-store/', '_blank')}
                 disabled
-                className="flex items-center px-3 py-1.5 bg-neutral-200 text-neutral-500 rounded-md text-xs font-semibold cursor-not-allowed opacity-70 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-1 focus:ring-offset-white"
+                className="flex items-center px-3 py-1.5 bg-blue-200 text-blue-600 rounded-md text-xs font-semibold cursor-not-allowed opacity-70 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1 focus:ring-offset-white"
                 title="Deploy to App Store (Coming Soon)"
               >
                 <svg className="h-4 w-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
@@ -318,6 +317,7 @@ const App: React.FC = () => {
                 </svg>
                 Deploy to App Store
               </button>
+             <EarlyBirdApiInput onApplyApiKey={handleApplyApiKey} isLoading={isLoading} />
              <button
                 title="Connect GitHub (Coming Soon)"
                 disabled

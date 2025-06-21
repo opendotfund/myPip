@@ -110,10 +110,19 @@ Generate the following:
     -   Use placeholder images (e.g., from https://picsum.photos/width/height) if necessary.
     -   The HTML should be a single, self-contained block of markup designed to look like a mobile app screen.
     -   Ensure content is visible on a white background (e.g., use dark text like text-neutral-700).
-    -   **Crucially**: For any interactive elements in the HTML preview (buttons, links that simulate app actions), add two data attributes:
-        -   \`data-action-id="UNIQUE_ACTION_IDENTIFIER"\`: A concise, unique identifier for the action this element performs (e.g., "submitForm", "navigateToDetails", "addItem"). Use camelCase.
-        -   \`data-action-description="User-friendly description of the action"\`: A short phrase describing what the button does (e.g., "Submit user data", "View product details", "Add a new task to the list").
-        -   Example: \`<button data-action-id="addItem" data-action-description="Add new item to list" class="bg-blue-500 text-white p-2 rounded">Add Item</button>\`
+    -   **CRITICAL**: For any interactive elements in the HTML preview (buttons, links that simulate app actions), you MUST add these exact data attributes:
+        -   \`data-action-id="UNIQUE_ACTION_IDENTIFIER"\`: A concise, unique identifier for the action this element performs. Use descriptive camelCase names like:
+            - \`addItem\`, \`deleteItem\`, \`editItem\` for list management
+            - \`submitForm\`, \`saveData\`, \`cancelForm\` for form actions
+            - \`viewDetails\`, \`navigateTo\`, \`goBack\` for navigation
+            - \`toggleSwitch\`, \`toggleMenu\`, \`toggleView\` for state toggles
+            - \`selectItem\`, \`chooseOption\`, \`pickCategory\` for selections
+        -   \`data-action-description="User-friendly description of the action"\`: A short phrase describing what the button does (e.g., "Add new item to list", "Submit user data", "View product details").
+    -   **IMPORTANT**: Make all interactive elements clearly clickable by adding these Tailwind classes: \`cursor-pointer hover:opacity-80 transition-opacity\`
+    -   **Example button**: \`<button data-action-id="addItem" data-action-description="Add new item to list" class="bg-blue-500 text-white p-3 rounded-lg cursor-pointer hover:opacity-80 transition-opacity">Add Item</button>\`
+    -   **Example link**: \`<a href="#" data-action-id="viewDetails" data-action-description="View item details" class="text-blue-600 underline cursor-pointer hover:opacity-80 transition-opacity">View Details</a>\`
+
+**IMPORTANT**: ALWAYS include at least 2-3 interactive elements in your HTML preview to demonstrate the app's functionality. These should be meaningful actions that users would actually want to perform in the app.
 
 Return your response as a single JSON object with the following exact structure:
 {
@@ -146,9 +155,18 @@ Now, the user wants to refine this app with the following request:
 Based on this refinement request, update BOTH the SwiftUI code AND the HTML preview.
 Ensure the updated SwiftUI code is complete and functional for a single screen.
 Ensure the updated HTML preview accurately reflects the refined UI, using Tailwind CSS, and is suitable for a phone screen preview.
-**Crucially**: For any interactive elements in the updated HTML preview (buttons, links that simulate app actions), add or update two data attributes:
-    -   \`data-action-id="UNIQUE_ACTION_IDENTIFIER"\`: A concise, unique identifier for the action this element performs (e.g., "submitForm", "navigateToDetails", "addItem"). Use camelCase.
-    -   \`data-action-description="User-friendly description of the action"\`: A short phrase describing what the button does (e.g., "Submit user data", "View product details", "Add a new task to the list").
+
+**CRITICAL**: For any interactive elements in the updated HTML preview (buttons, links that simulate app actions), you MUST add or update these exact data attributes:
+    -   \`data-action-id="UNIQUE_ACTION_IDENTIFIER"\`: A concise, unique identifier for the action this element performs. Use descriptive camelCase names like:
+        - \`addItem\`, \`deleteItem\`, \`editItem\` for list management
+        - \`submitForm\`, \`saveData\`, \`cancelForm\` for form actions
+        - \`viewDetails\`, \`navigateTo\`, \`goBack\` for navigation
+        - \`toggleSwitch\`, \`toggleMenu\`, \`toggleView\` for state toggles
+        - \`selectItem\`, \`chooseOption\`, \`pickCategory\` for selections
+    -   \`data-action-description="User-friendly description of the action"\`: A short phrase describing what the button does (e.g., "Add new item to list", "Submit user data", "View product details").
+**IMPORTANT**: Make all interactive elements clearly clickable by adding these Tailwind classes: \`cursor-pointer hover:opacity-80 transition-opacity\`
+
+**IMPORTANT**: ALWAYS include at least 2-3 interactive elements in your HTML preview to demonstrate the app's functionality. These should be meaningful actions that users would actually want to perform in the app.
 
 Return your response as a single JSON object with the following exact structure:
 {
@@ -180,13 +198,37 @@ The user has just interacted with an element in the HTML preview.
 - Interaction Element Description: \`${actionDescription}\`
 
 This interaction signifies the user's intent to trigger the behavior associated with this element in the iOS app.
+
+**CRITICAL INSTRUCTIONS FOR HANDLING INTERACTIONS:**
+
+1. **ALWAYS make a VISIBLE change** to the app state when an interaction occurs. The user should see something different after clicking.
+
+2. **Common interaction patterns to implement:**
+   - **Navigation actions** (viewDetails, navigateTo, goBack): Show a new screen or overlay
+   - **Data actions** (addItem, deleteItem, submitForm): Update lists, show success messages, or change form state
+   - **Toggle actions** (toggleSwitch, toggleMenu): Change boolean states and update UI accordingly
+   - **Selection actions** (selectItem, chooseOption): Highlight selected items or update selection state
+   - **Action buttons** (save, cancel, confirm): Show loading states, success messages, or navigate away
+
+3. **Update BOTH the SwiftUI code AND HTML preview** to reflect the new state:
+   - Add or modify @State variables to track the new state
+   - Update the UI to show the result of the interaction
+   - Ensure the HTML preview visually represents the new state
+   - Add appropriate feedback (success messages, loading states, etc.)
+
+4. **Make the changes obvious and meaningful** - don't just change text, make functional changes that users would expect from the interaction.
+
 Your task is to:
-1.  Analyze the \`${actionId}\` and \`${actionDescription}\` to understand the user's intended action.
-2.  Update the **SwiftUI code** to implement the outcome of this action. For example:
-    -   If it was a navigation action, modify the code to show the new view or update state accordingly.
-    -   If it was a data manipulation action (e.g., 'add item', 'delete item'), update the relevant data structures and the UI to reflect this change.
-    -   If it was a toggle or state change, update the state variables and UI.
-3.  Update the **HTML preview** to visually represent the new state of the app AFTER this interaction has occurred. Ensure this new HTML preview also includes \`data-action-id\` and \`data-action-description\` attributes on its interactive elements.
+1. Analyze the \`${actionId}\` and \`${actionDescription}\` to understand the user's intended action.
+2. Update the **SwiftUI code** to implement the outcome of this action with visible state changes.
+3. Update the **HTML preview** to visually represent the new state of the app AFTER this interaction has occurred.
+4. Ensure the updated HTML preview includes \`data-action-id\` and \`data-action-description\` attributes on its interactive elements.
+
+**Example responses:**
+- If user clicks "Add Item" → Add an item to a list and show a success message
+- If user clicks "View Details" → Show a detailed view or modal
+- If user clicks "Submit Form" → Show loading state, then success message
+- If user clicks "Toggle Switch" → Change the switch state and update related UI
 
 Return your response as a single JSON object with the following exact structure:
 {
@@ -195,8 +237,8 @@ Return your response as a single JSON object with the following exact structure:
 }
 
 Ensure the swiftCode and previewHtml are valid, properly escaped strings within the JSON structure.
-Focus on making the SwiftUI code reflect the direct consequence of the specified user interaction.
-The updated HTML preview must accurately reflect the new app state.
+Focus on making the SwiftUI code reflect the direct consequence of the specified user interaction with VISIBLE changes.
+The updated HTML preview must accurately reflect the new app state and show what changed.
 `;
   return [{ role: "user", parts: [{ text: systemInstruction }] }];
 };
