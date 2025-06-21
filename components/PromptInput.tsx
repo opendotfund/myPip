@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ModelId, ModelOption } from '../types';
 import { AI_MODELS } from '../constants';
@@ -42,7 +41,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="e.g., A simple todo list app with a button to add tasks..."
-        className="w-full p-3 bg-amber-50 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors text-neutral-800 placeholder-neutral-400 min-h-[120px] resize-none disabled:opacity-70 disabled:cursor-not-allowed"
+        className="w-full p-3 bg-amber-50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors text-neutral-800 placeholder-neutral-400 min-h-[120px] resize-none disabled:opacity-70 disabled:cursor-not-allowed"
         rows={5}
         disabled={isLoading || isDisabled}
         aria-label="App description prompt"
@@ -53,7 +52,7 @@ export const PromptInput: React.FC<PromptInputProps> = ({
             value={selectedModel}
             onChange={(e) => onModelChange(e.target.value)}
             disabled={isLoading || isDisabled}
-            className="w-full appearance-none bg-amber-50 border border-neutral-300 text-neutral-800 py-2.5 px-3 pr-8 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full appearance-none bg-amber-50 border border-amber-200 text-neutral-800 py-2.5 px-3 pr-8 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
             aria-label="Select AI Model"
           >
             {AI_MODELS.map((model: ModelOption) => (

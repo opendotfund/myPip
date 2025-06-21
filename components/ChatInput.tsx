@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { SendIcon } from './icons/SendIcon';
 import { LoadingSpinner } from './LoadingSpinner';
@@ -38,7 +37,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
         onChange={(e) => setPrompt(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
-        className="flex-grow p-3 bg-amber-50 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors text-neutral-800 placeholder-neutral-400 resize-none disabled:opacity-70 disabled:cursor-not-allowed"
+        className="flex-grow p-3 bg-amber-50 border border-amber-200 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors text-neutral-800 placeholder-neutral-400 resize-none disabled:opacity-70 disabled:cursor-not-allowed"
         rows={2}
         disabled={isLoading || isDisabled}
         aria-label="Refinement prompt"

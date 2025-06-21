@@ -212,7 +212,7 @@ const App: React.FC = () => {
 
   const getChatItemBackgroundClass = (type: 'user' | 'ai' | 'interaction') => {
     switch (type) {
-      case 'user': return 'bg-amber-100 text-amber-800';
+      case 'user': return 'bg-blue-100 text-blue-800';
       case 'ai': return 'bg-neutral-100 text-neutral-700';
       case 'interaction': return 'bg-sky-100 text-sky-800';
       default: return 'bg-gray-100 text-gray-700';
@@ -277,7 +277,7 @@ const App: React.FC = () => {
                 Unlimited Access
               </div>
             ) : (
-              <div className="text-xs sm:text-sm font-medium text-amber-700 bg-amber-100 px-2 sm:px-3 py-1 rounded-full">
+              <div className="text-xs sm:text-sm font-medium text-amber-700 bg-amber-50 border border-amber-200 px-2 sm:px-3 py-1 rounded-full">
                 Prompts: {freePromptsRemaining}/{MAX_FREE_PROMPTS}
               </div>
             )}
@@ -292,7 +292,7 @@ const App: React.FC = () => {
             <button
               onClick={refreshPreview}
               title="Refresh Preview"
-              className="p-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="p-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-600 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               <RefreshIcon className="h-5 w-5" />
             </button>
@@ -305,7 +305,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex flex-col space-y-6">
-          <div className="flex flex-col sm:flex-row justify-end items-end gap-3 mb-2"> {/* Changed items-center to items-end */}
+          <div className="flex flex-col sm:flex-row justify-end items-start gap-3 mb-2">
              <button
                 onClick={() => window.open('https://developer.apple.com/app-store/', '_blank')}
                 disabled
@@ -317,7 +317,11 @@ const App: React.FC = () => {
                 </svg>
                 Deploy to App Store
               </button>
-             <EarlyBirdApiInput onApplyApiKey={handleApplyApiKey} isLoading={isLoading} />
+             <EarlyBirdApiInput 
+               onApplyApiKey={handleApplyApiKey} 
+               isLoading={isLoading} 
+               onOpenSubscriptionModal={() => setIsSubscriptionModalOpen(true)}
+             />
              <button
                 title="Connect GitHub (Coming Soon)"
                 disabled
@@ -358,7 +362,7 @@ const App: React.FC = () => {
                   />
                 </div>
                  {chatHistory.length > 0 && (
-                  <div className="bg-amber-50 p-3 rounded-lg border border-neutral-200 text-xs">
+                  <div className="bg-blue-50 p-3 rounded-lg border border-neutral-200 text-xs">
                     <p className="font-semibold text-neutral-600 mb-2">Refinement Log:</p>
                     <div ref={chatHistoryRef} className="max-h-48 overflow-y-auto space-y-2 pr-1">
                       {chatHistory.map((item, index) => (
@@ -382,7 +386,7 @@ const App: React.FC = () => {
                 <button
                     onClick={downloadSwiftCode}
                     disabled={isLoading || generatedCode.startsWith('//') || generatedCode.startsWith('Error:')}
-                    className="px-3 py-1.5 bg-amber-500 hover:bg-amber-600 disabled:bg-neutral-300 text-white text-xs font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400"
+                    className="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 disabled:bg-neutral-300 text-white text-xs font-semibold rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
                     title="Download .swift file"
                 >
                     Download Code
